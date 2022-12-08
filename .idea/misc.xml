@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/backgroun_edit_text.xml" value="0.162" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/fragment_convert_currency.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_details.xml" value="0.19610507246376813" />
+        <entry key="app/src/main/res/layout/item_layout.xml" value="0.25181159420289856" />
       </map>
     </option>
   </component>
