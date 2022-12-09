@@ -39,11 +39,57 @@
             android:id="@+id/fromCountryAutoTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
+            android:inputType="none"
             android:padding="1dp"
+            android:textSize="12sp"
             app:tint="@color/green" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+
+    <EditText
+        android:id="@+id/fromEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/backgroun_edit_text"
+        android:hint="Enter amount to convert"
+        android:imeOptions="actionDone"
+        android:inputType="numberDecimal"
+        android:paddingVertical="12dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAlignment="textStart"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toStartOf="@+id/toEditText"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fromCountryLayout" />
+
+    <EditText
+        android:id="@+id/toEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="20dp"
+        android:layout_weight="1"
+        android:background="@drawable/backgroun_edit_text"
+        android:hint="Enter amount to convert"
+        android:imeOptions="actionDone"
+        android:inputType="numberDecimal"
+        android:paddingVertical="12dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:textAlignment="textStart"
+        android:textSize="11sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/fromEditText"
+        app:layout_constraintTop_toBottomOf="@+id/fromCountryLayout" />
+
 
     <TextView
         android:id="@+id/toTv"

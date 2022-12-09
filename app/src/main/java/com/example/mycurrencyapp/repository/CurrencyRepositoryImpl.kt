@@ -3,6 +3,7 @@ package com.example.mycurrencyapp.repository
 import com.example.mycurrencyapp.api.CurrencyApi
 import com.example.mycurrencyapp.domain.CurrencyRepository
 import com.example.mycurrencyapp.domain.mapper.toListSymbol
+import com.example.mycurrencyapp.models.convert.ConversionResponse
 import com.example.mycurrencyapp.models.symbolsModel.Symbols
 import com.example.mycurrencyapp.models.symbolsModel.SymbolsResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,6 +19,14 @@ class CurrencyRepositoryImpl @Inject constructor(
 //    }
     override suspend fun getCurrencySymbols(): SymbolsResponse {
         return api.getSymbols()
+    }
+
+    override suspend fun convertCurrency(
+        amount: String,
+        to: String,
+        from: String
+    ): ConversionResponse {
+        return api.convertCurrency(amount, to, from)
     }
 
 

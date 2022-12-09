@@ -5,7 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mycurrencyapp.common.Resource
 import com.example.mycurrencyapp.domain.CurrencyRepository
+import com.example.mycurrencyapp.domain.conversionUseCase.GetConversionRateUseCase
 import com.example.mycurrencyapp.domain.symbolUseCase.GetSymbolsUseCase
+import com.example.mycurrencyapp.models.convert.ConversionResponse
+import com.example.mycurrencyapp.models.convert.ConversionResult
 import com.example.mycurrencyapp.models.symbolsModel.SymbolsResponse
 import com.example.mycurrencyapp.models.symbolsModel.SymbolsResult
 import com.example.mycurrencyapp.repository.CurrencyRepositoryImpl
@@ -19,11 +22,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CurrencyViewModel @Inject constructor(
-    val getSymbolsUseCase: GetSymbolsUseCase
+    val getSymbolsUseCase: GetSymbolsUseCase,
+    val getConversionRate: GetConversionRateUseCase
 ): ViewModel() {
 
     private val _symbolCurrency = MutableSharedFlow<SymbolsResult>()
     val symbolCurrency = _symbolCurrency.asSharedFlow()
+
+    private val _conversionRate = MutableSharedFlow<ConversionResult>()
+    val conversionRate = _conversionRate.asSharedFlow()
 
 
 
@@ -47,6 +54,22 @@ class CurrencyViewModel @Inject constructor(
             }
 
 
+        }.launchIn(viewModelScope)
+    }
+
+    fun getRate(amount: String, to: String, from:String) {
+        getConversionRate(amount, to, from).onEach { result ->
+            when(result) {
+                is Resource.Success -> {
+                    _conversionRate.emit(ConversionResult(conversion = result.data))
+                }
+                is Resource.Error -> {
+                    _conversionRate.emit(ConversionResult(error = result.message!!))
+                }
+                is Resource.Loading -> {
+                    _conversionRate.emit(ConversionResult(isLoading = true))
+                }
+            }
         }.launchIn(viewModelScope)
     }
 //    fun getSymbol() {
