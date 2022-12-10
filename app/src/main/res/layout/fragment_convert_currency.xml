@@ -4,7 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_screen"
     tools:context=".features.ConvertCurrencyFragment">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <TextView
         android:id="@+id/fromTv"
@@ -13,6 +24,7 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:text="from:"
+        android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/toTv"
         app:layout_constraintHorizontal_bias="0.5"
@@ -124,10 +136,36 @@
             android:id="@+id/toCountryAutoTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textAutoComplete"
+            android:inputType="none"
             android:padding="1dp"
+            android:textSize="12sp"
             app:tint="@color/green" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <android.widget.Button
+        android:id="@+id/detailsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="50dp"
+        android:text="Details"
+        app:layout_constraintTop_toBottomOf="@+id/fromEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/rateTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/the_conversion_rate_is"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/toTv"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailsButton"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

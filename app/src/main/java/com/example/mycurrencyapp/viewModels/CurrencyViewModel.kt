@@ -26,10 +26,10 @@ class CurrencyViewModel @Inject constructor(
     val getConversionRate: GetConversionRateUseCase
 ): ViewModel() {
 
-    private val _symbolCurrency = MutableSharedFlow<SymbolsResult>()
+    private val _symbolCurrency = MutableSharedFlow<Resource<SymbolsResult>>()
     val symbolCurrency = _symbolCurrency.asSharedFlow()
 
-    private val _conversionRate = MutableSharedFlow<ConversionResult>()
+    private val _conversionRate = MutableSharedFlow<Resource<ConversionResult>>()
     val conversionRate = _conversionRate.asSharedFlow()
 
 
@@ -41,15 +41,15 @@ class CurrencyViewModel @Inject constructor(
             when (result) {
                 is Resource.Success -> {
                     Log.d("symbols", "Ghyto2")
-                    _symbolCurrency.emit(SymbolsResult(symbols = result.data))
+                    _symbolCurrency.emit(Resource.Success(SymbolsResult(symbols = result.data)))
                 }
                 is Resource.Error -> {
                     Log.d("symbols", "Ghyto3")
-                    _symbolCurrency.emit(SymbolsResult(error = result.message!!))
+                    _symbolCurrency.emit(Resource.Error(result.message, SymbolsResult(error = result.message!!)))
                 }
                 is Resource.Loading -> {
                     Log.d("symbols", "Ghyto4")
-                    _symbolCurrency.emit(SymbolsResult(isLoading = true))
+                    _symbolCurrency.emit(Resource.Loading(SymbolsResult(isLoading = true)))
                 }
             }
 
@@ -61,13 +61,13 @@ class CurrencyViewModel @Inject constructor(
         getConversionRate(amount, to, from).onEach { result ->
             when(result) {
                 is Resource.Success -> {
-                    _conversionRate.emit(ConversionResult(conversion = result.data))
+                    _conversionRate.emit(Resource.Success(ConversionResult(conversion = result.data)))
                 }
                 is Resource.Error -> {
-                    _conversionRate.emit(ConversionResult(error = result.message!!))
+                    _conversionRate.emit(Resource.Error(result.message))
                 }
                 is Resource.Loading -> {
-                    _conversionRate.emit(ConversionResult(isLoading = true))
+                    _conversionRate.emit(Resource.Loading(ConversionResult(isLoading = true)))
                 }
             }
         }.launchIn(viewModelScope)

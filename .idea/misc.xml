@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/backgroun_edit_text.xml" value="0.162" />
+        <entry key="app/src/main/res/drawable/background_screen.xml" value="0.1005" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.19610507246376813" />
         <entry key="app/src/main/res/layout/fragment_convert_currency.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_details.xml" value="0.19610507246376813" />
