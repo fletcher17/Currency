@@ -14,7 +14,7 @@ class GetSymbolsUseCase @Inject constructor(
     private val repository: CurrencyRepository
 ) {
     fun getCurrencySymbols(): Flow<Resource<Map<String, String>>> = flow {
-        Log.d("symbols", "Ghyto9")
+
         try {
             emit(Resource.Loading())
             val symbols = repository.getCurrencySymbols()

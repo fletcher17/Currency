@@ -56,25 +56,7 @@ class ConvertCurrencyFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.symbolCurrency.collectLatest {
                 val result: Resource<SymbolsResult> = it ?: return@collectLatest
-                Log.d("convert listed", "$countryList")
 
-//                if(result.isLoading) {
-//                    binding.progressBar.visibility = View.VISIBLE
-//                } else if (result.success) {
-//                    binding.progressBar.visibility = View.GONE
-//                    result.symbols?.forEach { symbol ->
-//                        countryList.add(symbol.key)
-//                    }
-//                    Log.d("convert list", "$countryList")
-//                    Log.d("convert", "${result.symbols}")
-//                } else {
-//                    Log.d("error coming", "${response.error}")
-//                    binding.progressBar.visibility = View.GONE
-//                    Snackbar.make(binding.root, response.error, Snackbar.LENGTH_LONG)
-//                        .setAction("Retry") {
-//                            viewModel.getSymbols()
-//                        }.show()
-//                }
                 when(result) {
                     is Resource.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
@@ -84,11 +66,10 @@ class ConvertCurrencyFragment : Fragment() {
                         result.data?.symbols?.forEach { symbol ->
                             countryList.add(symbol.key)
                         }
-                        Log.d("convert list", "$countryList")
-                        Log.d("convert", "${result}")
+
                     }
                     is Resource.Error -> {
-                        Log.d("error coming", "${result.message}")
+
                         binding.progressBar.visibility = View.GONE
                         Snackbar.make(binding.root, result.message!!, Snackbar.LENGTH_LONG)
                             .setAction("Retry") {
@@ -127,7 +108,7 @@ class ConvertCurrencyFragment : Fragment() {
             lastValue = true
             fromAmount = textChar.toString()
             viewModel.getRate(textChar.toString(), binding.toCountryAutoTextView.text.toString(), binding.fromCountryAutoTextView.text.toString())
-            Log.d("result2", textChar.toString())
+
 
         }
 
@@ -187,10 +168,10 @@ class ConvertCurrencyFragment : Fragment() {
                     is Resource.Success -> {
                         binding.toEditText.setText(result.data?.conversion?.result.toString())
                         binding.rateTv.text = getString(R.string.the_conversion_rate_is, result.data?.conversion?.info?.rate.toString())
-                        Log.d("result1", "$result")
+
                     }
                     is Resource.Error -> {
-                        Log.d("result11", "${result.data?.error}")
+
                         result.data?.let { it1 -> Snackbar.make(binding.root, it1.error, Snackbar.LENGTH_LONG).show() }
                     }
                 }

@@ -35,20 +35,20 @@ class CurrencyViewModel @Inject constructor(
 
 
     fun getSymbols() {
-        Log.d("symbols", "Ghyto")
+
         getSymbolsUseCase.getCurrencySymbols().onEach { result ->
-            Log.d("symbols", "Ghyto1")
+
             when (result) {
                 is Resource.Success -> {
-                    Log.d("symbols", "Ghyto2")
+
                     _symbolCurrency.emit(Resource.Success(SymbolsResult(symbols = result.data)))
                 }
                 is Resource.Error -> {
-                    Log.d("symbols", "Ghyto3")
+
                     _symbolCurrency.emit(Resource.Error(result.message, SymbolsResult(error = result.message!!)))
                 }
                 is Resource.Loading -> {
-                    Log.d("symbols", "Ghyto4")
+
                     _symbolCurrency.emit(Resource.Loading(SymbolsResult(isLoading = true)))
                 }
             }
